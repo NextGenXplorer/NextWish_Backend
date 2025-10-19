@@ -6,7 +6,7 @@ import uuid
 import shutil
 from datetime import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 CORS(app)
 
 # Configuration
@@ -51,6 +51,11 @@ def allowed_file(filename):
 
 @app.route('/', methods=['GET'])
 def index():
+    """Serve the main website"""
+    return send_from_directory('static', 'index.html')
+
+@app.route('/api', methods=['GET'])
+def api_info():
     """API information endpoint"""
     return jsonify({
         'message': 'NextWish Birthday Greeting API',

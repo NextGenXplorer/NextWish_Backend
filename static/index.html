@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextWish - Birthday Greeting Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎂 NextWish</h1>
+            <p class="tagline">Create Beautiful Birthday Greetings</p>
+        </header>
+
+        <main>
+            <!-- Template Selection -->
+            <section class="template-selection" id="templateSelection">
+                <h2>Choose a Template</h2>
+                <div class="templates-grid" id="templatesGrid">
+                    <!-- Templates will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Customization Form -->
+            <section class="customization-form" id="customizationForm" style="display: none;">
+                <button class="back-btn" onclick="backToTemplates()">← Back to Templates</button>
+
+                <div class="form-container">
+                    <h2>Customize Your Greeting</h2>
+                    <p class="template-description" id="templateDescription"></p>
+
+                    <form id="greetingForm">
+                        <input type="hidden" id="selectedTemplate" name="template_id">
+
+                        <!-- Name Input (All Templates) -->
+                        <div class="form-group">
+                            <label for="name">Recipient's Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter name">
+                        </div>
+
+                        <!-- Message Input (Template 1 & 3) -->
+                        <div class="form-group" id="messageGroup" style="display: none;">
+                            <label for="message">Birthday Message *</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Write your birthday message here..."></textarea>
+                        </div>
+
+                        <!-- Single Image Upload (Template 1) -->
+                        <div class="form-group" id="singleImageGroup" style="display: none;">
+                            <label for="userImage">Upload Photo *</label>
+                            <input type="file" id="userImage" name="user_image" accept="image/*">
+                            <div class="image-preview" id="singleImagePreview"></div>
+                        </div>
+
+                        <!-- Multiple Images Upload (Template 2) -->
+                        <div class="form-group" id="multipleImagesGroup" style="display: none;">
+                            <label for="images">Upload 10 Photos *</label>
+                            <input type="file" id="images" name="images" accept="image/*" multiple>
+                            <p class="help-text">Select exactly 10 images for the carousel</p>
+                            <div class="images-preview" id="multipleImagesPreview"></div>
+                            <div class="image-count" id="imageCount">0 / 10 images selected</div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span id="btnText">Generate Greeting</span>
+                            <span class="loader" id="loader" style="display: none;"></span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section class="result-section" id="resultSection" style="display: none;">
+                <div class="result-container">
+                    <h2>🎉 Your Greeting is Ready!</h2>
+                    <p class="success-message">Share this special birthday greeting with your loved one</p>
+
+                    <div class="greeting-url">
+                        <input type="text" id="greetingUrl" readonly>
+                        <button onclick="copyUrl()" class="copy-btn">Copy Link</button>
+                    </div>
+
+                    <div class="action-buttons">
+                        <a id="viewGreetingBtn" href="#" target="_blank" class="view-btn">View Greeting</a>
+                        <button onclick="createAnother()" class="create-another-btn">Create Another</button>
+                    </div>
+
+                    <div class="share-section">
+                        <h3>Share via:</h3>
+                        <div class="share-buttons">
+                            <button onclick="shareWhatsApp()" class="share-btn whatsapp">WhatsApp</button>
+                            <button onclick="shareEmail()" class="share-btn email">Email</button>
+                            <button onclick="shareTwitter()" class="share-btn twitter">Twitter</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Made with ❤️ by NextWish Team</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
