@@ -1,0 +1,341 @@
+{
+  "info": {
+    "name": "NextWish Birthday Greeting API",
+    "description": "Complete API collection for NextWish Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "greeting_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Get API Info",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/",
+          "host": ["{{base_url}}"],
+          "path": [""]
+        },
+        "description": "Get basic API information and available endpoints"
+      }
+    },
+    {
+      "name": "2. List Templates",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/templates",
+          "host": ["{{base_url}}"],
+          "path": ["api", "templates"]
+        },
+        "description": "Get list of all available greeting templates"
+      }
+    },
+    {
+      "name": "3. Generate - Template 1 (No Images)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 201) {",
+              "    var jsonData = pm.response.json();",
+              "    pm.collectionVariables.set('greeting_id', jsonData.greeting_id);",
+              "    pm.environment.set('greeting_id', jsonData.greeting_id);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "template_id",
+              "value": "template1",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "Sarah Johnson",
+              "type": "text"
+            },
+            {
+              "key": "message",
+              "value": "Wishing you an amazing birthday filled with joy and happiness!",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/generate",
+          "host": ["{{base_url}}"],
+          "path": ["api", "generate"]
+        },
+        "description": "Generate Template 1 greeting without custom images"
+      }
+    },
+    {
+      "name": "4. Generate - Template 1 (With Image)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 201) {",
+              "    var jsonData = pm.response.json();",
+              "    pm.collectionVariables.set('greeting_id', jsonData.greeting_id);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "template_id",
+              "value": "template1",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "John Doe",
+              "type": "text"
+            },
+            {
+              "key": "message",
+              "value": "Have a wonderful birthday celebration!",
+              "type": "text"
+            },
+            {
+              "key": "user_image",
+              "type": "file",
+              "src": "/path/to/photo.jpg",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/generate",
+          "host": ["{{base_url}}"],
+          "path": ["api", "generate"]
+        },
+        "description": "Generate Template 1 greeting with custom user image. Enable 'user_image' field and select a photo."
+      }
+    },
+    {
+      "name": "5. Generate - Template 2 (3D Carousel)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 201) {",
+              "    var jsonData = pm.response.json();",
+              "    pm.collectionVariables.set('greeting_id', jsonData.greeting_id);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "template_id",
+              "value": "template2",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "Mike Anderson",
+              "type": "text"
+            },
+            {
+              "key": "images",
+              "type": "file",
+              "src": "/path/to/photo1.jpg",
+              "disabled": true
+            },
+            {
+              "key": "images",
+              "type": "file",
+              "src": "/path/to/photo2.jpg",
+              "disabled": true
+            },
+            {
+              "key": "images",
+              "type": "file",
+              "src": "/path/to/photo3.jpg",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/generate",
+          "host": ["{{base_url}}"],
+          "path": ["api", "generate"]
+        },
+        "description": "Generate Template 2 with 3D photo carousel. Enable 'images' fields and select multiple photos (up to 10)."
+      }
+    },
+    {
+      "name": "6. Generate - Template 3 (Interactive Gift)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 201) {",
+              "    var jsonData = pm.response.json();",
+              "    pm.collectionVariables.set('greeting_id', jsonData.greeting_id);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "template_id",
+              "value": "template3",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "Emily Davis",
+              "type": "text"
+            },
+            {
+              "key": "message",
+              "value": "Hope your special day brings you all the happiness you deserve! 🎉",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/generate",
+          "host": ["{{base_url}}"],
+          "path": ["api", "generate"]
+        },
+        "description": "Generate Template 3 interactive gift card"
+      }
+    },
+    {
+      "name": "7. Get Greeting Info",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/greeting/{{greeting_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "greeting", "{{greeting_id}}"]
+        },
+        "description": "Get information about a specific greeting. Uses greeting_id from previous generate request."
+      }
+    },
+    {
+      "name": "8. View Greeting (Browser)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/greeting/{{greeting_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["greeting", "{{greeting_id}}"]
+        },
+        "description": "Open greeting in browser. Copy this URL to browser to view the actual greeting card."
+      }
+    },
+    {
+      "name": "9. Delete Greeting",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/greeting/{{greeting_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "greeting", "{{greeting_id}}"]
+        },
+        "description": "Delete a specific greeting"
+      }
+    },
+    {
+      "name": "Error: Invalid Template",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "template_id",
+              "value": "invalid_template",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "Test User",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/generate",
+          "host": ["{{base_url}}"],
+          "path": ["api", "generate"]
+        },
+        "description": "Test error handling with invalid template_id"
+      }
+    },
+    {
+      "name": "Error: Missing Name",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "template_id",
+              "value": "template1",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/generate",
+          "host": ["{{base_url}}"],
+          "path": ["api", "generate"]
+        },
+        "description": "Test error handling with missing required field"
+      }
+    }
+  ]
+}
