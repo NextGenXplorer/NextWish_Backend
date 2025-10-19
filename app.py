@@ -363,5 +363,13 @@ def delete_greeting(greeting_id):
             'error': str(e)
         }), 500
 
+# Vercel serverless handler
+app.config['MAX_CONTENT_LENGTH'] = 4.5 * 1024 * 1024  # 4.5MB for Vercel
+
+# Export the Flask app for Vercel
+def handler(request):
+    return app(request.environ, lambda *args: None)
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
